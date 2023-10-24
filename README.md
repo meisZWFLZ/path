@@ -1,2 +1,1 @@
-# path
-LemLib path decoder
+# LemLib Path File Format Encoder/Decoder
