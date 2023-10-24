@@ -63,3 +63,35 @@ TEST_CASE("test encode & decode") {
         }
     }
 }
+
+TEST_CASE("benchmark encode & decode") {
+    PathFile pf;
+
+    // make 100 random paths, with 100 to 1000 random waypoints
+    for (int i = 0; i < 100; i++) {
+        Path p;
+        p.name = "Path " + to_string(i);
+
+        for (int j = 0; j < 1000; j++) {
+            Waypoint w;
+            w.x = rand() % 32768 - 16384;
+            w.y = rand() % 32768 - 16384;
+            w.speed = rand() % 65536 - 32768;
+            w.heading = rand() % 65536;
+            w.lookahead = rand() % 32768 - 16384;
+            w.isHeadingAvailable = rand() % 2;
+            w.isLookaheadAvailable = rand() % 2;
+            p.waypoints.push_back(w);
+        }
+
+        pf.paths.push_back(p);
+    }
+
+    uint8_t* buf = new uint8_t[1024 * 1024 * 10];
+
+    size_t size = 1024 * 1024 * 10;
+    // BENCHMARK("encode") { encode(pf, buf, size); };
+
+    PathFile pf2;
+    // BENCHMARK("decode") { decode(buf, size, pf2); };
+}
