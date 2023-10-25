@@ -18,7 +18,7 @@ TEST_CASE("test encode & decode") {
         p.name = "Path " + to_string(i);
 
         for (int j = 0; j < rand() % 900 + 100; j++) {
-            Waypoint w;
+            Waypoint w = {StaticWaypoint()};
             w.x = rand() % 32768 - 16384;
             w.y = rand() % 32768 - 16384;
             w.speed = rand() % 65536 - 32768;
@@ -73,7 +73,7 @@ TEST_CASE("benchmark encode & decode") {
         p.name = "Path " + to_string(i);
 
         for (int j = 0; j < 1000; j++) {
-            Waypoint w;
+            Waypoint w = {StaticWaypoint()};
             w.x = rand() % 32768 - 16384;
             w.y = rand() % 32768 - 16384;
             w.speed = rand() % 65536 - 32768;
